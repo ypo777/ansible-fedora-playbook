@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+
+  vars_files:
+    - default-config.yml
+
+  roles:
+    - role: dnf_configuration
+      when: configure_dnf
+      tags: ['dnf']
+    - role: zsh_configuration
+      when: configure_zsh
+      tags: ['zsh']
+    - role: terminal_configuration
+      when: configure_terminal
+      tags: ['config_terminal']
+
+  tasks:
+    - import_tasks: tasks/dnf-install.yml
+      tags: ['dnf-packages']

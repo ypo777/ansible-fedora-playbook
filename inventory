@@ -1,0 +1,5 @@
+[all]
+192.168.2.117
+[all:vars]
+ansible_ssh_user=yanpaingoo
+ansible_ssh_pass=Juxdoit2022#

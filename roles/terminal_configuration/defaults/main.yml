@@ -1,0 +1,11 @@
+---
+dotfiles_repo: "https://github.com/ypo777/dotfiles.git"
+dotfiles_repo_version: Dev
+dotfiles_repo_accept_hostkey: true
+dotfiles_repo_local_destination: "/home/yanpaingoo/dotfiles"
+
+dotfiles_home: "/home/yanpaingoo/"
+dotfiles_files:
+  - .gitignore
+  - .gitconfig
+  - .config/starship.toml

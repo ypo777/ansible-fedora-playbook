@@ -1,0 +1,26 @@
+---
+- name: Install ZSH Requirements for Termainl Configurations
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ terminal_packages }}"
+
+- name: Set zsh as default shell  | command
+  become: true
+  become_user: root
+  command: "chsh -s /usr/bin/zsh {{ lookup('env', 'USER') }}"
+  register: zsh_for_user
+  failed_when: zsh_for_user.rc >= 1
+  changed_when: zsh_for_user.rc == 0
+
+- name: Checks for oh-my-zsh installation | stat
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+  register: oh_my_zsh_stat
+
+- name: Download oh-my-zsh | command
+  become: true
+  command: "{{ item }}"
+  loop: 
+    - wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh

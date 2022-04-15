@@ -1,0 +1,44 @@
+---
+- name: Changing DNF Default Settings
+  lineinfile:
+    path: "/etc/dnf/dnf.conf"
+    line: "{{ item }}"
+    create: yes
+  with_items: 
+    - fastestmirror=True
+    - max_parallel_downloads=10
+    - defaultyes=True
+
+- name: Upgrading DNF Packages
+  dnf:
+    name: "*"
+    state: latest
+
+#- name: Enable RPM Fusion Free Repo & Non Free Repo
+#  shell: rpm -U "{{ item }}"
+#  when: ansible_distribution == 'Fedora'
+#  loop: 
+#    - "{{ rpm_free_repo }}"
+#    - "{{ rpm_nonfree_repo }}"
+#- name: Installing Gstream Plugin & Lame
+#  dnf: 
+#    name: "{{ item }}"
+#    state: present
+#  loop:
+#    - "{{ gstream_plugin }}"
+#    - "{{ lame }}"
+#    - "{{ multimedia_group }}"
+#    - "{{ enable_third_party }}"
+
+- name: Importing VScode And SublimeText REPO
+  shell: rpm --import "{{ item }}"
+  when: ansible_distribution == 'Fedora'
+  loop:
+    - "{{ vscode }}"
+    - "{{ sublimetext3 }}"
+
+- name: Enabling VScode & SublimeText REPO
+  shell: "{{ item }}"
+  loop:
+    - "{{ vscode_repo }}"
+    - "{{ sublimetext3_repo }}"
