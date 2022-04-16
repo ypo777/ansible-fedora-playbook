@@ -31,12 +31,20 @@ vscode_repo: sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https
 sublimetext3: https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 sublimetext3_repo: sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 
+dnf_packages: 
+  - google-chrome-stable
+  - sublime-text
+  - code
+  - lpf-spotify-client
+  - gnome-tweaks
+
+
 #Termainl Configuration
 terminal_packages:
   - zsh
   - starship
   - tmux
-  - util-linux-user
+  - util-linux-user #For Changing ZSH SHELL AS DEFAULT
 
 #dotfiles config
 dotfiles_files:
@@ -47,9 +55,3 @@ dotfiles_folder:
   - starship.toml
   - tmux
 
-dnf_packages: 
-  - google-chrome-stable
-  - sublime-text
-  - code
-  - lpf-spotify-client
-  - gnome-tweaks
